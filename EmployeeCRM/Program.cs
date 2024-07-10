@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EmployeeCRM.Services;
+using System;
 using System.Windows.Forms;
 
 namespace EmployeeCRM
@@ -16,7 +14,8 @@ namespace EmployeeCRM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            NavigationService.ShowForm(FormNames.LoginForm);
+            Application.Run();
         }
     }
 }
