@@ -93,6 +93,7 @@ namespace EmployeeCRM.DAL
         {
             DataTable dt = DBContext.MakeQuery($"SELECT COUNT(*) FROM [{tableName}]");
             return (int)dt.Rows[0][0] == 0;
+            //return (int)dt.Rows.Count == 0;
         }
     }
 }
