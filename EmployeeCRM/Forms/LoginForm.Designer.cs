@@ -30,8 +30,8 @@
         {
             this.materialTextBoxEdit1 = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             this.materialLabel1 = new ReaLTaiizor.Controls.MaterialLabel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label_login = new System.Windows.Forms.Label();
+            this.label_changePassword = new System.Windows.Forms.Label();
             this.materialLabel2 = new ReaLTaiizor.Controls.MaterialLabel();
             this.materialTextBoxEdit2 = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             this.SuspendLayout();
@@ -79,31 +79,33 @@
             this.materialLabel1.TabIndex = 1;
             this.materialLabel1.Text = "תעודת זהות";
             // 
-            // label1
+            // label_login
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.LightGreen;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(75, 335);
-            this.label1.MinimumSize = new System.Drawing.Size(250, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(250, 48);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "כניסה";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_login.AutoSize = true;
+            this.label_login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.label_login.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_login.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label_login.Location = new System.Drawing.Point(75, 335);
+            this.label_login.MinimumSize = new System.Drawing.Size(250, 48);
+            this.label_login.Name = "label_login";
+            this.label_login.Size = new System.Drawing.Size(250, 48);
+            this.label_login.TabIndex = 4;
+            this.label_login.Text = "כניסה";
+            this.label_login.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // label_changePassword
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.LightGreen;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(75, 414);
-            this.label2.MinimumSize = new System.Drawing.Size(250, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(250, 48);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "החלפת ססמא";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_changePassword.AutoSize = true;
+            this.label_changePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.label_changePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_changePassword.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label_changePassword.Location = new System.Drawing.Point(75, 414);
+            this.label_changePassword.MinimumSize = new System.Drawing.Size(250, 48);
+            this.label_changePassword.Name = "label_changePassword";
+            this.label_changePassword.Size = new System.Drawing.Size(250, 48);
+            this.label_changePassword.TabIndex = 5;
+            this.label_changePassword.Text = "החלפת ססמא";
+            this.label_changePassword.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // materialLabel2
             // 
@@ -155,8 +157,8 @@
             this.ClientSize = new System.Drawing.Size(385, 573);
             this.Controls.Add(this.materialLabel2);
             this.Controls.Add(this.materialTextBoxEdit2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label_changePassword);
+            this.Controls.Add(this.label_login);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.materialTextBoxEdit1);
             this.Name = "LoginForm";
@@ -172,8 +174,8 @@
 
         private ReaLTaiizor.Controls.MaterialTextBoxEdit materialTextBoxEdit1;
         private ReaLTaiizor.Controls.MaterialLabel materialLabel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_login;
+        private System.Windows.Forms.Label label_changePassword;
         private ReaLTaiizor.Controls.MaterialLabel materialLabel2;
         private ReaLTaiizor.Controls.MaterialTextBoxEdit materialTextBoxEdit2;
     }
