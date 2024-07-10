@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Data;
-using System.Drawing;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Cryptography;
 
 namespace EmployeeCRM.DAL
 {
     internal static class DBContext
     {
-        private static readonly string _connectionString = "Data Source=AEK\\SQLEXPRESS;Initial catalog=company1;Integrated Security=True;";
+        private static readonly string _DBName = "CompanyStaging";
+        private static readonly string _connectionString = $"Data Source=AEK\\SQLEXPRESS;Initial catalog={_DBName};Integrated Security=True;";
         public static DataTable MakeQuery(string queryStr)
         {
             DataTable output = new DataTable();
@@ -35,6 +33,30 @@ namespace EmployeeCRM.DAL
             }
 
             return output;
+        }
+
+        public static int ExecuteNonQuery(string queryStr)
+        {
+            int affectedRows = 0;
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(queryStr, conn))
+                {
+                    try
+                    {
+                        conn.Open();
+                        affectedRows = cmd.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex)
+                    {
+                        Console.WriteLine("An error occurred: " + ex.Message);
+                        // Handle the exception as needed
+                    }
+                }
+            }
+
+            return affectedRows;
         }
     }
 }

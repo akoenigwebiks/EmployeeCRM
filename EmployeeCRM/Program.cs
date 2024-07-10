@@ -1,4 +1,5 @@
-﻿using EmployeeCRM.Services;
+﻿using EmployeeCRM.DAL;
+using EmployeeCRM.Services;
 using System;
 using System.Windows.Forms;
 
@@ -14,6 +15,7 @@ namespace EmployeeCRM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            SeedService.EnsureDatabaseSetup();            
             NavigationService.ShowForm(FormNames.LoginForm);
             Application.Run();
         }
