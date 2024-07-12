@@ -1,5 +1,6 @@
 ﻿using EmployeeCRM.DAL;
 using EmployeeCRM.Services;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
@@ -48,26 +49,45 @@ namespace EmployeeCRM
             }
 
             // Ensure the password is treated as a string in the SQL query
-            string query = $@"SELECT Employees.EmployeeNat, Passwords.EmployeePassword
-                      FROM Employees
-                      JOIN Passwords ON Employees.ID = Passwords.EmployeeID
-                      WHERE Employees.EmployeeNat = '{tz}' 
-                      AND Passwords.EmployeePassword = '{password}';";
+            string query = $@"SELECT Employees.EmployeeNat, Passwords.EmployeePassword, Passwords.HasAccess, Passwords.ExpiryDate
+                                  FROM Employees
+                                  JOIN Passwords ON Employees.ID = Passwords.EmployeeID
+                                  WHERE Employees.EmployeeNat = '{tz}' 
+                                  AND Passwords.EmployeePassword = '{password}';";
 
             // Validate using Dbcontext
             DataTable findUser = DBContext.MakeQuery(query);
 
-            // Check if a user was found
-            if (findUser.Rows.Count > 0)
+
+            string reenterPassword = "פרטים שגויים, אנא נסה שוב.";
+            if (findUser.Rows.Count == 0)
             {
-                MessageBox.Show("התחברת בהצלחה!");
-                // Proceed to the next part of your application
-                // For example, open a new form or dashboard
+                MessageBox.Show(reenterPassword);
+                return;
             }
-            else
+
+            // Check if the password has expired or the user hasaccess is 0
+            DataRow user = findUser.Rows[0];
+            bool hasAccess = (bool)user["HasAccess"];
+            DateTime expiryDate = (DateTime)user["ExpiryDate"];
+
+            if (!hasAccess)
             {
-                MessageBox.Show("פרטים שגויים, אנא נסה שוב.");
+                MessageBox.Show(reenterPassword);
+                return;
             }
+
+            if (expiryDate < DateTime.Now)
+            {
+                isNavigating = true;
+                MessageBox.Show("סיסמה פגה, נא לפנות למנהל המערכת.");
+                NavigationService.ShowForm(FormNames.PasswordChangeForm);
+                return;
+            }
+
+
+            MessageBox.Show("התחברת בהצלחה!");
+
         }
 
     }
