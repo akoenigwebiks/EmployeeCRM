@@ -15,8 +15,8 @@ namespace EmployeeCRM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            SeedService.EnsureDatabaseSetup();            
-            NavigationService.ShowForm(FormNames.LoginForm);
+            SeedService.EnsureDatabaseSetup();
+            NavigationService.ShowForm(FormNames.ShiftClockForm, false);
             Application.Run();
         }
     }
