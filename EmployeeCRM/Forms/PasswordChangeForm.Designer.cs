@@ -31,7 +31,7 @@
             this.label_password = new ReaLTaiizor.Controls.MaterialLabel();
             this.textbox_password = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             this.label_changePassword = new System.Windows.Forms.Label();
-            this.label_login = new System.Windows.Forms.Label();
+            this.label_cancel = new System.Windows.Forms.Label();
             this.label_tz = new ReaLTaiizor.Controls.MaterialLabel();
             this.textbox_tz = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             this.label_newPassword1 = new ReaLTaiizor.Controls.MaterialLabel();
@@ -66,7 +66,7 @@
             this.textbox_password.HideSelection = true;
             this.textbox_password.LeadingIcon = null;
             this.textbox_password.Location = new System.Drawing.Point(52, 202);
-            this.textbox_password.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_password.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_password.MaxLength = 32767;
             this.textbox_password.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
             this.textbox_password.Name = "textbox_password";
@@ -99,22 +99,23 @@
             this.label_changePassword.TabIndex = 11;
             this.label_changePassword.Text = "החלפת ססמא";
             this.label_changePassword.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_changePassword.Click += new System.EventHandler(this.label_changePassword_Click);
             // 
-            // label_login
+            // label_cancel
             // 
-            this.label_login.AutoSize = true;
-            this.label_login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(69)))), ((int)(((byte)(54)))));
-            this.label_login.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_login.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label_login.Location = new System.Drawing.Point(52, 510);
-            this.label_login.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_login.MinimumSize = new System.Drawing.Size(188, 39);
-            this.label_login.Name = "label_login";
-            this.label_login.Size = new System.Drawing.Size(188, 39);
-            this.label_login.TabIndex = 10;
-            this.label_login.Text = "ביטול";
-            this.label_login.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_login.Click += new System.EventHandler(this.label_login_Click);
+            this.label_cancel.AutoSize = true;
+            this.label_cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(69)))), ((int)(((byte)(54)))));
+            this.label_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_cancel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label_cancel.Location = new System.Drawing.Point(52, 510);
+            this.label_cancel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_cancel.MinimumSize = new System.Drawing.Size(188, 39);
+            this.label_cancel.Name = "label_cancel";
+            this.label_cancel.Size = new System.Drawing.Size(188, 39);
+            this.label_cancel.TabIndex = 10;
+            this.label_cancel.Text = "ביטול";
+            this.label_cancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_cancel.Click += new System.EventHandler(this.label_cancel_Click);
             // 
             // label_tz
             // 
@@ -142,7 +143,7 @@
             this.textbox_tz.HideSelection = true;
             this.textbox_tz.LeadingIcon = null;
             this.textbox_tz.Location = new System.Drawing.Point(52, 115);
-            this.textbox_tz.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_tz.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_tz.MaxLength = 32767;
             this.textbox_tz.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
             this.textbox_tz.Name = "textbox_tz";
@@ -187,7 +188,7 @@
             this.textbox_newPassword1.HideSelection = true;
             this.textbox_newPassword1.LeadingIcon = null;
             this.textbox_newPassword1.Location = new System.Drawing.Point(52, 320);
-            this.textbox_newPassword1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_newPassword1.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_newPassword1.MaxLength = 32767;
             this.textbox_newPassword1.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
             this.textbox_newPassword1.Name = "textbox_newPassword1";
@@ -232,7 +233,7 @@
             this.textbox_newPassword2.HideSelection = true;
             this.textbox_newPassword2.LeadingIcon = null;
             this.textbox_newPassword2.Location = new System.Drawing.Point(52, 405);
-            this.textbox_newPassword2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_newPassword2.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_newPassword2.MaxLength = 32767;
             this.textbox_newPassword2.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
             this.textbox_newPassword2.Name = "textbox_newPassword2";
@@ -263,10 +264,10 @@
             this.Controls.Add(this.label_password);
             this.Controls.Add(this.textbox_password);
             this.Controls.Add(this.label_changePassword);
-            this.Controls.Add(this.label_login);
+            this.Controls.Add(this.label_cancel);
             this.Controls.Add(this.label_tz);
             this.Controls.Add(this.textbox_tz);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PasswordChangeForm";
             this.Padding = new System.Windows.Forms.Padding(2, 52, 2, 2);
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -282,7 +283,7 @@
         private ReaLTaiizor.Controls.MaterialLabel label_password;
         private ReaLTaiizor.Controls.MaterialTextBoxEdit textbox_password;
         private System.Windows.Forms.Label label_changePassword;
-        private System.Windows.Forms.Label label_login;
+        private System.Windows.Forms.Label label_cancel;
         private ReaLTaiizor.Controls.MaterialLabel label_tz;
         private ReaLTaiizor.Controls.MaterialTextBoxEdit textbox_tz;
         private ReaLTaiizor.Controls.MaterialLabel label_newPassword1;
