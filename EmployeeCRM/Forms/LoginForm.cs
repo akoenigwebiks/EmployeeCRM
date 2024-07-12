@@ -17,8 +17,7 @@ namespace EmployeeCRM
 
         private void label_changePassword_Click(object sender, System.EventArgs e)
         {
-            isNavigating = true;
-            NavigationService.ShowForm(FormNames.PasswordChangeForm);
+            NavigateTo(FormNames.PasswordChangeForm);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -48,47 +47,36 @@ namespace EmployeeCRM
                 return;
             }
 
-            // Ensure the password is treated as a string in the SQL query
-            string query = $@"SELECT Employees.EmployeeNat, Passwords.EmployeePassword, Passwords.HasAccess, Passwords.ExpiryDate
-                                  FROM Employees
-                                  JOIN Passwords ON Employees.ID = Passwords.EmployeeID
-                                  WHERE Employees.EmployeeNat = '{tz}' 
-                                  AND Passwords.EmployeePassword = '{password}';";
+            AuthResult authResult = AuthService.Login(tz, password);
 
-            // Validate using Dbcontext
-            DataTable findUser = DBContext.MakeQuery(query);
-
-
-            string reenterPassword = "פרטים שגויים, אנא נסה שוב.";
-            if (findUser.Rows.Count == 0)
+            switch (authResult)
             {
-                MessageBox.Show(reenterPassword);
-                return;
+                case AuthResult.Success:
+                    MessageBox.Show("התחברת בהצלחה");
+                    NavigateTo(FormNames.PasswordChangeForm);
+                    // TODO - Navigate to the main form when it's ready
+                    return;
+                case AuthResult.PasswordExpired:
+                    MessageBox.Show("הסיסמה פגה");
+                    NavigateTo(FormNames.PasswordChangeForm);
+                    return;
             }
 
-            // Check if the password has expired or the user hasaccess is 0
-            DataRow user = findUser.Rows[0];
-            bool hasAccess = (bool)user["HasAccess"];
-            DateTime expiryDate = (DateTime)user["ExpiryDate"];
-
-            if (!hasAccess)
+            string errorMessage = authResult switch
             {
-                MessageBox.Show(reenterPassword);
-                return;
-            }
+                AuthResult.InvalidCredentials => "פרטי הכניסה שגויים",
+                AuthResult.NoAccess => "אין לך גישה למערכת",
+                AuthResult.Error => "שגיאה בהתחברות",
+                _ => "שגיאה בהתחברות"
+            };
 
-            if (expiryDate < DateTime.Now)
-            {
-                isNavigating = true;
-                MessageBox.Show("סיסמה פגה, נא לפנות למנהל המערכת.");
-                NavigationService.ShowForm(FormNames.PasswordChangeForm);
-                return;
-            }
-
-
-            MessageBox.Show("התחברת בהצלחה!");
-
+            MessageBox.Show(errorMessage);
         }
 
+        private void NavigateTo(FormNames formName)
+        {
+            isNavigating = true;
+            NavigationService.ShowForm(formName);
+        }
     }
 }
