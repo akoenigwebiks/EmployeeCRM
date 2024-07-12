@@ -62,7 +62,6 @@ namespace EmployeeCRM.DAL
             return output;
         }
 
-
         public static int ExecuteNonQuery(string queryStr, SqlParameter[] parameters)
         {
             int affectedRows = 0;
