@@ -273,6 +273,7 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.Text = "החלפת סיסמה";
+            this.FormClosing += MainForm_FormClosing;
             this.ResumeLayout(false);
             this.PerformLayout();
 

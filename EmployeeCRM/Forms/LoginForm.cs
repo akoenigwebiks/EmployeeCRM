@@ -1,9 +1,5 @@
-﻿using EmployeeCRM.DAL;
-using EmployeeCRM.Services;
-using System;
-using System.Data;
+﻿using EmployeeCRM.Services;
 using System.Windows.Forms;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace EmployeeCRM
 {
@@ -15,26 +11,13 @@ namespace EmployeeCRM
             InitializeComponent();
         }
 
-        private void label_changePassword_Click(object sender, System.EventArgs e)
-        {
-            NavigateTo(FormNames.PasswordChangeForm);
-        }
+        private void label_changePassword_Click(object sender, System.EventArgs e) =>
+            NavigationService.ShowForm(FormNames.PasswordChangeForm, isNavigating);
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!isNavigating && e.CloseReason == CloseReason.UserClosing)
-            {
-                string confirmExitQuestion = "האם ברצונך לצאת מהמערכת?";
-                string confirmExitTitle = "אשר יציאה מהמערכת";
-                DialogResult dialogResult = MessageBox.Show(confirmExitQuestion, confirmExitTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    Application.Exit();
-                    return;
-                }
-                e.Cancel = true;
-            }
-        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) =>
+            NavigationService.HandleCloseFormEvent(sender, e, isNavigating);
+
 
         private void label_login_Click(object sender, System.EventArgs e)
         {
@@ -53,12 +36,13 @@ namespace EmployeeCRM
             {
                 case AuthResult.Success:
                     MessageBox.Show("התחברת בהצלחה");
-                    NavigateTo(FormNames.PasswordChangeForm);
+                    NavigationService.ShowForm(FormNames.ShiftClockForm, isNavigating);
+
                     // TODO - Navigate to the main form when it's ready
                     return;
                 case AuthResult.PasswordExpired:
                     MessageBox.Show("הסיסמה פגה");
-                    NavigateTo(FormNames.PasswordChangeForm);
+                    NavigationService.ShowForm(FormNames.PasswordChangeForm, isNavigating);
                     return;
             }
 
@@ -71,12 +55,6 @@ namespace EmployeeCRM
             };
 
             MessageBox.Show(errorMessage);
-        }
-
-        private void NavigateTo(FormNames formName)
-        {
-            isNavigating = true;
-            NavigationService.ShowForm(formName);
         }
     }
 }

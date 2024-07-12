@@ -7,6 +7,7 @@ namespace EmployeeCRM.Forms
     public partial class PasswordChangeForm : ReaLTaiizor.Forms.MaterialForm
     {
         private string _Tz;
+        private bool isNavigating = false;
         public PasswordChangeForm()
         {
             InitializeComponent();
@@ -15,7 +16,12 @@ namespace EmployeeCRM.Forms
 
         private void label_cancel_Click(object sender, EventArgs e)
         {
-            NavigationService.ShowForm(FormNames.LoginForm);
+            NavigationService.ShowForm(FormNames.LoginForm, isNavigating);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            NavigationService.HandleCloseFormEvent(sender, e, isNavigating);
         }
 
         private void label_changePassword_Click(object sender, EventArgs e)
@@ -33,7 +39,7 @@ namespace EmployeeCRM.Forms
                 _ when oldPassword == newPassword => "הסיסמה החדשה זהה לסיסמה הישנה",
                 _ => string.Empty
             };
-             
+
             if (!string.IsNullOrEmpty(message))
             {
                 MessageBox.Show(message);
@@ -44,7 +50,7 @@ namespace EmployeeCRM.Forms
             if (success)
             {
                 MessageBox.Show("הסיסמה שונתה בהצלחה");
-                NavigationService.ShowForm(FormNames.LoginForm);
+                NavigationService.ShowForm(FormNames.LoginForm, isNavigating);
                 // TODO - Navigate to the main form when it's ready
             }
             else
