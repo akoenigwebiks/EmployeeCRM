@@ -12,11 +12,12 @@ namespace EmployeeCRM.Forms
         {
             InitializeComponent();
             _Tz = AuthService.Tz;
+            textbox_tz.Text = _Tz;
         }
 
         private void label_cancel_Click(object sender, EventArgs e)
         {
-            NavigationService.ShowForm(FormNames.LoginForm, isNavigating);
+            NavigationService.ShowForm(FormNames.LoginForm, ref isNavigating);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -50,7 +51,7 @@ namespace EmployeeCRM.Forms
             if (success)
             {
                 MessageBox.Show("הסיסמה שונתה בהצלחה");
-                NavigationService.ShowForm(FormNames.LoginForm, isNavigating);
+                NavigationService.ShowForm(FormNames.LoginForm, ref isNavigating);
                 // TODO - Navigate to the main form when it's ready
             }
             else

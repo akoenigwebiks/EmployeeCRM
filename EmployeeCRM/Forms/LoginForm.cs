@@ -12,7 +12,7 @@ namespace EmployeeCRM
         }
 
         private void label_changePassword_Click(object sender, System.EventArgs e) =>
-            NavigationService.ShowForm(FormNames.PasswordChangeForm, isNavigating);
+            NavigationService.ShowForm(FormNames.PasswordChangeForm, ref isNavigating);
 
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) =>
@@ -36,13 +36,13 @@ namespace EmployeeCRM
             {
                 case AuthResult.Success:
                     MessageBox.Show("התחברת בהצלחה");
-                    NavigationService.ShowForm(FormNames.ShiftClockForm, isNavigating);
+                    NavigationService.ShowForm(FormNames.ShiftClockForm, ref isNavigating);
 
                     // TODO - Navigate to the main form when it's ready
                     return;
                 case AuthResult.PasswordExpired:
                     MessageBox.Show("הסיסמה פגה");
-                    NavigationService.ShowForm(FormNames.PasswordChangeForm, isNavigating);
+                    NavigationService.ShowForm(FormNames.PasswordChangeForm, ref isNavigating);
                     return;
             }
 

@@ -38,7 +38,7 @@ namespace EmployeeCRM.Services
             openForms.ForEach(f => f.Close());
         }
         
-        public static void ShowForm(FormNames formName,bool isNavigating)
+        public static void ShowForm(FormNames formName,ref bool isNavigating)
         {
             isNavigating = true;
             CloseAllForms();
