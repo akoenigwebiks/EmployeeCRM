@@ -1,14 +1,36 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace EmployeeCRM.DAL
 {
     internal static class SeedService
     {
+        private readonly static string _DBName = "CompanyStaging";
         public static void EnsureDatabaseSetup()
         {
+            bool dbExists = EnsureDatabaseExists();
+            if (!dbExists)
+            {
+                MessageBox.Show($"Error reading from Database {_DBName}.");
+                Environment.Exit(1);
+            }
             EnsureTables();
             SeedData();
+        }
+
+
+        /// <summary>
+        /// Ensures that the specified database exists, creating it if it does not.
+        /// </summary>
+        /// <param name="databaseName">The name of the database to check and create if necessary.</param>
+        public static bool EnsureDatabaseExists()
+        {
+            string query = $@"SELECT * FROM sys.databases WHERE name = @dbName;";
+            DataTable dt = DBContext.MakeQuery(query, new SqlParameter[] { new SqlParameter("@dbName", _DBName) });
+            return dt.Rows.Count != 0;
         }
 
         /// <summary>
@@ -55,7 +77,8 @@ namespace EmployeeCRM.DAL
                         PRIMARY KEY CLUSTERED ([ID] ASC),
                         FOREIGN KEY ([EmployeeID]) REFERENCES [dbo].[Employees] ([ID])
                     );";
-            DBContext.ExecuteNonQuery(sqlStatements);
+            int result = DBContext.ExecuteNonQuery(sqlStatements);
+            Debug.WriteLine($"EnsureTables result: {result}");//0
         }
 
         public static void SeedData()
@@ -91,9 +114,17 @@ namespace EmployeeCRM.DAL
 
         private static bool IsTableEmpty(string tableName)
         {
-            DataTable dt = DBContext.MakeQuery($"SELECT COUNT(*) FROM [{tableName}]");
-            return (int)dt.Rows[0][0] == 0;
-            //return (int)dt.Rows.Count == 0;
+            try
+            {
+                DataTable dt = DBContext.MakeQuery($"SELECT COUNT(*) FROM [{tableName}]");
+                return (int)dt.Rows[0][0] == 0;
+                //return (int)dt.Rows.Count == 0;
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine($"Table {tableName} does not exist.");
+                return false;
+            }
         }
     }
 }
